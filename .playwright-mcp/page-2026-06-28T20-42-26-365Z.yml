@@ -1,8 +1,0 @@
-- generic [ref=e7]:
-  - heading "AI Status Light" [level=1] [ref=e8]
-  - generic [ref=e9]: Telegram traffic-light for your AI coding agent
-  - generic [ref=e10]:
-    - generic [ref=e11]: Working on your task…
-    - generic [ref=e13]: Waiting for your confirmation
-    - generic [ref=e15]: Task complete
-  - generic [ref=e17]: github.com/thevseprod/ai-status-light · bash + curl · MIT
