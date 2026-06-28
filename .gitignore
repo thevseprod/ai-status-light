@@ -8,6 +8,10 @@ state/*
 # Системное
 .DS_Store
 
+# Артефакты рендера / playwright
+ai-status-banner.png
+.playwright-mcp/
+
 # Приватные правила стрима владельца — не для публики
 CLAUDE.md
 
