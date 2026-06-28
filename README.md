@@ -1,5 +1,9 @@
 # 🚦 Claude Code Traffic-Light Notifier
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+**[English](#english)** · **[Русский](#русский)**
+
 Get Telegram notifications about your **Claude Code** agent's state — like a traffic light.
 Step away from your machine and still know what your agent is doing.
 
@@ -22,8 +26,10 @@ The bot hooks into Claude Code events and sends you a colored Telegram message:
 | 🟢 | Done, idle | hook `Stop` |
 
 ### Requirements
-- macOS or Linux, with `bash` and `curl` (preinstalled on both)
 - A Telegram account
+- A shell with `bash` and `curl`:
+  - **macOS / Linux** — works out of the box
+  - **Windows** — via **WSL** (recommended) or **Git Bash**. Notifications work fine; the background watchdog is more reliable under WSL.
 
 ### Install
 1. **Create a bot:** open [@BotFather](https://t.me/BotFather) in Telegram → `/newbot` → copy the token it gives you.
@@ -76,8 +82,10 @@ Telegram-бот, который шлёт тебе **статус агента Cl
 | 🟢 | Готово, свободен | хук `Stop` |
 
 ### Требования
-- macOS или Linux, `bash` и `curl` (уже стоят)
 - аккаунт Telegram
+- оболочка с `bash` и `curl`:
+  - **macOS / Linux** — работает из коробки
+  - **Windows** — через **WSL** (рекомендуется) или **Git Bash**. Уведомления работают; фоновый сторож надёжнее под WSL.
 
 ### Установка
 1. **Создай бота:** [@BotFather](https://t.me/BotFather) → `/newbot` → скопируй токен.
