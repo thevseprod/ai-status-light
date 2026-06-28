@@ -2,74 +2,16 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**[English](#english)** · **[Русский](#русский)**
+**[Русский](#русский)** · **[English](#english)**
 
-Get Telegram notifications about your **Claude Code** agent's state — like a traffic light.
-Step away from your machine and still know what your agent is doing.
+Telegram-уведомления о состоянии агента **Claude Code** — как светофор.
+Отошёл от компьютера, но всё равно знаешь, чем он занят. Только уведомления (без кнопок), крошечный, без зависимостей кроме `bash` + `curl`.
 
-> 🟡 working · 🔴 waiting for you / error · 🟢 done & idle
-
-Notify-only (no buttons), tiny, zero dependencies beyond `bash` + `curl`.
-
----
-
-## English
-
-### How it works
-The bot hooks into Claude Code events and sends you a colored Telegram message:
-
-| Signal | Meaning | Source |
-|--------|---------|--------|
-| 🟡 | Working on your task | hook `UserPromptSubmit` |
-| 🔴 | Waiting for your approval | hook `Notification` |
-| 🔴 | Stuck on an error too long | background watchdog |
-| 🟢 | Done, idle | hook `Stop` |
-
-### Requirements
-- A Telegram account
-- A shell with `bash` and `curl`:
-  - **macOS / Linux** — works out of the box
-  - **Windows** — via **WSL** (recommended) or **Git Bash**. Notifications work fine; the background watchdog is more reliable under WSL.
-
-### Install
-1. **Create a bot:** open [@BotFather](https://t.me/BotFather) in Telegram → `/newbot` → copy the token it gives you.
-2. **Create your config:** `cp .env.example .env`
-3. **Add your token:** open `.env` and paste the token into `TELEGRAM_BOT_TOKEN=`. **Never commit `.env`.**
-4. **Get your chat id:** send your bot any message (e.g. `/start`), then run
-   `bash scripts/get_chat_id.sh` and paste the printed id into `TELEGRAM_CHAT_ID=` in `.env`.
-5. **Test:** `bash scripts/notify.sh green` — you should receive a message.
-6. **Enable hooks:** `.claude/settings.json` is already wired up. Restart Claude Code (or run `/hooks`) so it loads them.
-7. **Start the watchdog** (optional — powers the “stuck” signal):
-   `nohup bash scripts/watchdog.sh >/dev/null 2>&1 &`
-
-### Customize the messages
-All phrases live in `phrases/*.txt` — one phrase per line, a random one is picked each time.
-Edit them freely to change the tone or language.
-
-**Want a private set that won't be overwritten or committed?** Drop files with the
-same names into `phrases/custom/` — they take priority over the defaults and are gitignored.
-
-### Configuration
-- `STUCK_THRESHOLD_MINUTES` in `.env` — how many minutes "stuck" before the 🔴 alert (default `5`).
-
-### Security
-- Your token and chat id live **only** in `.env`, which is gitignored. Only `.env.example`
-  (fake placeholders) is committed.
-- If your token ever leaks, revoke it in [@BotFather](https://t.me/BotFather) (`/revoke`) and put a new one in `.env`.
-
-### Turn it off
-Remove the hooks (edit `.claude/settings.json` or use `/hooks`) and stop the watchdog:
-`pkill -f watchdog.sh`.
-
-### License
-[MIT](LICENSE) — use it, change it, ship it.
+> 🟡 в работе · 🔴 ждёт тебя / ошибка · 🟢 готово
 
 ---
 
 ## Русский
-
-Telegram-бот, который шлёт тебе **статус агента Claude Code** — как светофор.
-Отошёл от компьютера, но всё равно в курсе, чем агент занят. Только уведомления (без кнопок).
 
 ### Как работает
 Бот цепляется к событиям Claude Code и шлёт цветное сообщение в Telegram:
@@ -119,3 +61,59 @@ Telegram-бот, который шлёт тебе **статус агента Cl
 
 ### Лицензия
 [MIT](LICENSE) — бери, меняй, используй.
+
+---
+
+## English
+
+Telegram notifications about your **Claude Code** agent's state — like a traffic light.
+Step away from your machine and still know what your agent is doing. Notify-only (no buttons), tiny, zero dependencies beyond `bash` + `curl`.
+
+### How it works
+The bot hooks into Claude Code events and sends you a colored Telegram message:
+
+| Signal | Meaning | Source |
+|--------|---------|--------|
+| 🟡 | Working on your task | hook `UserPromptSubmit` |
+| 🔴 | Waiting for your approval | hook `Notification` |
+| 🔴 | Stuck on an error too long | background watchdog |
+| 🟢 | Done, idle | hook `Stop` |
+
+### Requirements
+- A Telegram account
+- A shell with `bash` and `curl`:
+  - **macOS / Linux** — works out of the box
+  - **Windows** — via **WSL** (recommended) or **Git Bash**. Notifications work fine; the background watchdog is more reliable under WSL.
+
+### Install
+1. **Create a bot:** open [@BotFather](https://t.me/BotFather) in Telegram → `/newbot` → copy the token it gives you.
+2. **Create your config:** `cp .env.example .env`
+3. **Add your token:** open `.env` and paste the token into `TELEGRAM_BOT_TOKEN=`. **Never commit `.env`.**
+4. **Get your chat id:** send your bot any message (e.g. `/start`), then run
+   `bash scripts/get_chat_id.sh` and paste the printed id into `TELEGRAM_CHAT_ID=` in `.env`.
+5. **Test:** `bash scripts/notify.sh green` — you should receive a message.
+6. **Enable hooks:** `.claude/settings.json` is already wired up. Restart Claude Code (or run `/hooks`) so it loads them.
+7. **Start the watchdog** (optional — powers the “stuck” signal):
+   `nohup bash scripts/watchdog.sh >/dev/null 2>&1 &`
+
+### Customize the messages
+All phrases live in `phrases/*.txt` — one phrase per line, a random one is picked each time.
+Edit them freely to change the tone or language.
+
+**Want a private set that won't be overwritten or committed?** Drop files with the
+same names into `phrases/custom/` — they take priority over the defaults and are gitignored.
+
+### Configuration
+- `STUCK_THRESHOLD_MINUTES` in `.env` — how many minutes "stuck" before the 🔴 alert (default `5`).
+
+### Security
+- Your token and chat id live **only** in `.env`, which is gitignored. Only `.env.example`
+  (fake placeholders) is committed.
+- If your token ever leaks, revoke it in [@BotFather](https://t.me/BotFather) (`/revoke`) and put a new one in `.env`.
+
+### Turn it off
+Remove the hooks (edit `.claude/settings.json` or use `/hooks`) and stop the watchdog:
+`pkill -f watchdog.sh`.
+
+### License
+[MIT](LICENSE) — use it, change it, ship it.
