@@ -5,6 +5,8 @@
 
 **[Русский](#русский)** · **[English](#english)**
 
+![AI Status Light — Telegram traffic-light for your AI coding agent](assets/banner.png)
+
 Telegram-уведомления о состоянии твоего **ИИ-агента для кодинга** — как светофор.
 Отошёл от компьютера, но всё равно знаешь, чем он занят. Без кнопок, крошечный, без зависимостей кроме `bash` + `curl`.
 
