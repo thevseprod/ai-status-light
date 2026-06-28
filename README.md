@@ -58,6 +58,11 @@ bash scripts/notify.sh green    # закончил
 **Хочешь свой приватный набор, который не перезапишется и не уйдёт в git?**
 Положи файлы с теми же именами в `phrases/custom/` — у них приоритет, и они скрыты от git.
 
+Тон — какой захочешь: хоть строгий, хоть с характером. Пример кастомного набора «с характером»:
+
+<img src="assets/demo-personality.png" width="380" alt="Пример кастомного тона бота">
+
+
 ### Конфиг
 - `STUCK_THRESHOLD_MINUTES` в `.env` — через сколько минут затыка слать 🔴 (по умолчанию `5`).
 
@@ -126,6 +131,11 @@ Edit them freely to change the tone or language.
 
 **Want a private set that won't be overwritten or committed?** Drop files with the
 same names into `phrases/custom/` — they take priority over the defaults and are gitignored.
+
+Make the tone whatever you want — dry or full of personality. Example of a custom "personality" set (in Russian):
+
+<img src="assets/demo-personality.png" width="380" alt="Custom bot tone example">
+
 
 ### Configuration
 - `STUCK_THRESHOLD_MINUTES` in `.env` — how many minutes "stuck" before the 🔴 alert (default `5`).
