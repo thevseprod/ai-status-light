@@ -1,23 +1,25 @@
-# 🚦 Claude Code Traffic-Light Notifier
+# 🚦 AI Status Light
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 **[Русский](#русский)** · **[English](#english)**
 
-Telegram-уведомления о состоянии агента **Claude Code** — как светофор.
+Telegram-уведомления о состоянии твоего **ИИ-агента для кодинга** — как светофор.
 Отошёл от компьютера, но всё равно знаешь, чем он занят. Только уведомления (без кнопок), крошечный, без зависимостей кроме `bash` + `curl`.
 
 > 🟡 в работе · 🔴 ждёт тебя / ошибка · 🟢 готово
+
+Готовая интеграция — для **Claude Code**. Ядро от агента не зависит, поэтому легко адаптируется под любого (Codex, Cursor, Aider и др.).
 
 ---
 
 ## Русский
 
 ### Как работает
-Бот цепляется к событиям Claude Code и шлёт цветное сообщение в Telegram:
+Бот ловит события агента и шлёт цветное сообщение в Telegram. Готовый рецепт — для Claude Code:
 
-| Сигнал | Что значит | Источник |
-|--------|-----------|----------|
+| Сигнал | Что значит | Источник (Claude Code) |
+|--------|-----------|------------------------|
 | 🟡 | Работаю над задачей | хук `UserPromptSubmit` |
 | 🔴 | Жду твоего подтверждения | хук `Notification` |
 | 🔴 | Слишком долго не могу решить (затык) | фоновый сторож |
@@ -29,7 +31,7 @@ Telegram-уведомления о состоянии агента **Claude Code
   - **macOS / Linux** — работает из коробки
   - **Windows** — через **WSL** (рекомендуется) или **Git Bash**. Уведомления работают; фоновый сторож надёжнее под WSL.
 
-### Установка
+### Установка (для Claude Code)
 1. **Создай бота:** [@BotFather](https://t.me/BotFather) → `/newbot` → скопируй токен.
 2. **Создай конфиг:** `cp .env.example .env`
 3. **Впиши токен** в `.env` в поле `TELEGRAM_BOT_TOKEN=`. **Никогда не коммить `.env`.**
@@ -39,6 +41,15 @@ Telegram-уведомления о состоянии агента **Claude Code
 6. **Включи хуки:** файл `.claude/settings.json` уже настроен. Перезапусти Claude Code (или набери `/hooks`), чтобы он их подхватил.
 7. **Запусти сторож** (по желанию — для сигнала «затык»):
    `nohup bash scripts/watchdog.sh >/dev/null 2>&1 &`
+
+### Другие агенты (Codex, Cursor, Aider…)
+Ядро `scripts/notify.sh` ни от какого агента не зависит — это просто «отправь статус-сообщение в Telegram»:
+```
+bash scripts/notify.sh yellow   # начал работу
+bash scripts/notify.sh red      # ждёт тебя
+bash scripts/notify.sh green    # закончил
+```
+Чтобы подключить своего агента, нужно лишь дёрнуть эти команды на его событиях «начал / ждёт / закончил». Самый простой путь — **скормить этот репозиторий своему ИИ-агенту и попросить подцепить `notify.sh` к его механизму хуков/событий**. Бот, фразы и сторож при этом работают как есть.
 
 ### Настройка сообщений
 Все фразы — в `phrases/*.txt` (одна строка = одна фраза, выбирается случайно).
@@ -66,14 +77,18 @@ Telegram-уведомления о состоянии агента **Claude Code
 
 ## English
 
-Telegram notifications about your **Claude Code** agent's state — like a traffic light.
-Step away from your machine and still know what your agent is doing. Notify-only (no buttons), tiny, zero dependencies beyond `bash` + `curl`.
+Telegram notifications about your **AI coding agent**'s state — like a traffic light.
+Step away from your machine and still know what it's doing. Notify-only (no buttons), tiny, zero dependencies beyond `bash` + `curl`.
+
+> 🟡 working · 🔴 waiting for you / error · 🟢 done
+
+Ready-made integration is for **Claude Code**. The core is agent-agnostic, so it adapts easily to any agent (Codex, Cursor, Aider, etc.).
 
 ### How it works
-The bot hooks into Claude Code events and sends you a colored Telegram message:
+The bot catches your agent's events and sends a colored Telegram message. The ready-made recipe is for Claude Code:
 
-| Signal | Meaning | Source |
-|--------|---------|--------|
+| Signal | Meaning | Source (Claude Code) |
+|--------|---------|----------------------|
 | 🟡 | Working on your task | hook `UserPromptSubmit` |
 | 🔴 | Waiting for your approval | hook `Notification` |
 | 🔴 | Stuck on an error too long | background watchdog |
@@ -85,7 +100,7 @@ The bot hooks into Claude Code events and sends you a colored Telegram message:
   - **macOS / Linux** — works out of the box
   - **Windows** — via **WSL** (recommended) or **Git Bash**. Notifications work fine; the background watchdog is more reliable under WSL.
 
-### Install
+### Install (for Claude Code)
 1. **Create a bot:** open [@BotFather](https://t.me/BotFather) in Telegram → `/newbot` → copy the token it gives you.
 2. **Create your config:** `cp .env.example .env`
 3. **Add your token:** open `.env` and paste the token into `TELEGRAM_BOT_TOKEN=`. **Never commit `.env`.**
@@ -95,6 +110,15 @@ The bot hooks into Claude Code events and sends you a colored Telegram message:
 6. **Enable hooks:** `.claude/settings.json` is already wired up. Restart Claude Code (or run `/hooks`) so it loads them.
 7. **Start the watchdog** (optional — powers the “stuck” signal):
    `nohup bash scripts/watchdog.sh >/dev/null 2>&1 &`
+
+### Other agents (Codex, Cursor, Aider…)
+The core `scripts/notify.sh` doesn't depend on any agent — it just "sends a status message to Telegram":
+```
+bash scripts/notify.sh yellow   # started working
+bash scripts/notify.sh red      # waiting for you
+bash scripts/notify.sh green    # done
+```
+To wire up your own agent, just call these on its "started / waiting / done" events. The easiest path: **feed this repo to your own AI agent and ask it to hook `notify.sh` into its event/hook mechanism**. The bot, phrases, and watchdog all work as-is.
 
 ### Customize the messages
 All phrases live in `phrases/*.txt` — one phrase per line, a random one is picked each time.
