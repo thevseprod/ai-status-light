@@ -1,5 +1,6 @@
 # 🚦 AI Status Light
 
+[![CI](https://github.com/thevseprod/ai-status-light/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/thevseprod/ai-status-light/actions/workflows/shellcheck.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 **[Русский](#русский)** · **[English](#english)**
