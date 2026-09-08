@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/thevseprod/ai-status-light/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/thevseprod/ai-status-light/actions/workflows/shellcheck.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/github/v/release/thevseprod/ai-status-light?label=version&color=blue)](https://github.com/thevseprod/ai-status-light/releases)
+[![Stars](https://img.shields.io/github/stars/thevseprod/ai-status-light?style=flat&color=yellow)](https://github.com/thevseprod/ai-status-light/stargazers)
 
 **[Русский](#русский)** · **[English](#english)**
 
@@ -88,6 +90,12 @@ bash scripts/notify.sh green    # закончил
 ### Лицензия
 [MIT](LICENSE) — бери, меняй, используй.
 
+### Автор
+Пишу и показываю про VSЁ о нейросетях, ИИ-агентах и вайбкодинге - для облегчения жизни и заработка:
+
+- 📢 Telegram: [@buyonhigh](https://t.me/buyonhigh)
+- ▶️ YouTube: [@thevseproduction](https://www.youtube.com/@thevseproduction)
+
 ---
 
 ## English
@@ -168,3 +176,9 @@ Remove the hooks (`/hooks`) and stop the watchdog: `pkill -f watchdog.sh`.
 
 ### License
 [MIT](LICENSE) — use it, change it, ship it.
+
+### Author
+I write and show VSЁ about AI, agents and vibe coding - to make life easier and to earn:
+
+- 📢 Telegram: [@buyonhigh](https://t.me/buyonhigh)
+- ▶️ YouTube: [@thevseproduction](https://www.youtube.com/@thevseproduction)
